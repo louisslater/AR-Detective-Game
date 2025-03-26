@@ -4,9 +4,19 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>AR</title>
+
+    <script>
+        function addItemAndNavigate() {
+            let items = JSON.parse(localStorage.getItem('items')) || []; // Get existing items or start a new list
+            items.push('New Item'); // Add a new item
+            localStorage.setItem('items', JSON.stringify(items)); // Save updated list
+            window.location.href = 'Inventory.html'; // Navigate to inventory page
+        }
+    </script>
+
 </head>
 <body>
 <button onclick="window.location.href='Map.html'">Map</button>
-<button onclick="window.location.href='Inventory.html'">Add</button>
+<button onclick="addItemAndNavigate()">Add</button>
 </body>
 </html>

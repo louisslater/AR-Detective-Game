@@ -4,6 +4,40 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Inventory</title>
+    <script>
+        function loadItems() {
+            let items = JSON.parse(localStorage.getItem('items')) || []; // Get items from localStorage
+            let itemList = document.getElementById('itemList');
+            itemList.innerHTML = ''; // Clear the previous list
+
+            if (items.length === 0) {
+                itemList.innerHTML = '<p>No items added yet.</p>';
+            } else {
+                items.forEach((item, index) => {
+                    let li = document.createElement('li');
+                    li.textContent = item;
+
+                    // Add a "Remove" button for each item
+                    let removeButton = document.createElement('button');
+                    removeButton.textContent = 'Remove';
+                    removeButton.onclick = function() { removeItem(index); };
+
+                    li.appendChild(removeButton);
+                    itemList.appendChild(li);
+                });
+            }
+        }
+
+        function removeItem(index) {
+            let items = JSON.parse(localStorage.getItem('items')) || [];
+            items.splice(index, 1); // Remove item at the given index
+            localStorage.setItem('items', JSON.stringify(items)); // Update localStorage
+            loadItems(); // Reload the items list
+        }
+
+        window.onload = loadItems; // Load items when the page opens
+    </script>
+
 </head>
 <body>
 <h1>Inventory</h1>
