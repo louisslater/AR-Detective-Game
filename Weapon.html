@@ -8,7 +8,7 @@
     <script>
         function addItemAndNavigate() {
             let items = JSON.parse(localStorage.getItem('items')) || []; // Get existing items or start a new list
-            items.push('New Item'); // Add a new item
+            items.push('knife'); // Add a new item
             localStorage.setItem('items', JSON.stringify(items)); // Save updated list
             window.location.href = 'Inventory.html'; // Navigate to inventory page
         }
