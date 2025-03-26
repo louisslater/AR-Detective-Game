@@ -3,105 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>GPS Map</title>
-    <!-- Leaflet.js for map -->
-    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
-    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
-    <style>
-        body { margin: 0; font-family: Arial, sans-serif; }
-        #map { height: 70vh; width: 100%; }
-        #coords { text-align: center; padding: 10px; font-size: 16px; }
-        #version { position: absolute; top: 5px; left: 5px; font-size: 12px; color: gray; }
-    </style>
+    <title>Map</title>
 </head>
 <body>
-<div id="version">v06</div>
-<!-- Map container -->
-<div id="map"></div>
-<!-- Latitude/Longitude display -->
-<div id="coords">Loading coordinates...</div>
-<!-- AR container -->
-<script>
-    const targets = [
-        { lat: 53.0844322, long: -0.9565116, cubeId: 'cube1' },
-        { lat: 53.0843911, long: -0.9565646, cubeId: 'cube2' },
-        { lat: 53.0844544, long: -0.9566229, cubeId: 'cube3' }
-    ];
-    const radius = 5;
-    const mapDiv = document.getElementById('map');
-    const coordsDiv = document.getElementById('coords');
-    const cubes = {
-        cube1: document.getElementById('cube1'),
-        cube2: document.getElementById('cube2'),
-        cube3: document.getElementById('cube3')
-    };
-    const map = L.map('map').setView([targets[0].lat, targets[0].long], 15);
-    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-        attribution: '© OpenStreetMap contributors'
-    }).addTo(map);
-    let userMarker = L.marker([0, 0]).addTo(map);
-
-    targets.forEach(target => {
-        L.circle([target.lat, target.long], {
-            color: 'blue',
-            fillColor: 'blue',
-            fillOpacity: 0.5,
-            radius: radius
-        }).addTo(map);
-    });
-
-    function getDistance(lat1, lon1, lat2, lon2) {
-        const R = 6371e3;
-        const φ1 = lat1 * Math.PI / 180;
-        const φ2 = lat2 * Math.PI / 180;
-        const Δφ = (lat2 - lat1) * Math.PI / 180;
-        const Δλ = (lon2 - lon1) * Math.PI / 180;
-        const a = Math.sin(Δφ / 2) * Math.sin(Δφ / 2) + Math.cos(φ1) * Math.cos(φ2) * Math.sin(Δλ / 2) * Math.sin(Δλ / 2);
-        const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
-        return R * c;
-    }
-
-    let isFirstUpdate = true;
-    let isNearTarget = false;
-
-    function updatePosition(position) {
-        const lat = position.coords.latitude;
-        const long = position.coords.longitude;
-        userMarker.setLatLng([lat, long]);
-        if (isFirstUpdate) {
-            map.setView([lat, long], 15);
-            isFirstUpdate = false;
-        }
-        coordsDiv.textContent = `Lat: ${lat.toFixed(6)}, Long: ${long.toFixed(6)}`;
-        isNearTarget = false;
-
-        targets.forEach(target => {
-            const distance = getDistance(lat, long, target.lat, target.long);
-            const cube = cubes[target.cubeId];
-            if (distance <= radius) {
-                cube.setAttribute('visible', 'true');
-                isNearTarget = true;
-            } else {
-                cube.setAttribute('visible', 'false');
-            }
-        });
-
-        toggleArButton.style.display = isNearTarget ? 'block' : 'none';
-    }
-
-    toggleArButton.addEventListener('click', () => {
-        const isMapVisible = mapDiv.style.display !== 'none';
-        mapDiv.style.display = isMapVisible ? 'none' : 'block';
-        coordsDiv.style.display = isMapVisible ? 'none' : 'block';
-        arContainer.style.display = isMapVisible ? 'block' : 'none';
-        toggleArButton.textContent = isMapVisible ? 'Exit AR Mode' : 'Enter AR Mode';
-    });
-
-    if (navigator.geolocation) {
-        navigator.geolocation.watchPosition(updatePosition, error => coordsDiv.textContent = `Error: ${error.message}`, { enableHighAccuracy: true, maximumAge: 1000, timeout: 5000 });
-    } else {
-        coordsDiv.textContent = "Geolocation not supported.";
-    }
-</script>
+<h1>Map</h1>
+<button onclick="window.location.href='Inventory.html'">Inventory</button>
 </body>
 </html>
