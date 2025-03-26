@@ -7,6 +7,7 @@
     <script>
         function loadItems() {
             let items = JSON.parse(localStorage.getItem('items')) || []; // Get items from localStorage
+            console.log("Loaded items:", items); // Log items to see if they are fetched correctly
             let itemList = document.getElementById('itemList');
             itemList.innerHTML = ''; // Clear the previous list
 
@@ -15,7 +16,7 @@
             } else {
                 items.forEach((item, index) => {
                     let li = document.createElement('li');
-                    li.textContent = item;
+                    li.htmlContent = "<img src='Assets/Images/"+item + ".png'>";
 
                     // Add a "Remove" button for each item
                     let removeButton = document.createElement('button');
@@ -37,11 +38,10 @@
 
         window.onload = loadItems; // Load items when the page opens
     </script>
-
 </head>
 <body>
 <h1>Inventory</h1>
-<ul id="itemList"></ul>
+<ul id="itemList"></ul> <!-- This is where the items will be listed -->
 <button onclick="window.location.href='Map.html'">Map</button>
 </body>
 </html>
