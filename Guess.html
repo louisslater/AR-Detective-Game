@@ -4,11 +4,69 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Guess</title>
+    <style>
+        .container {
+            display: flex;
+            justify-content: space-between;
+            padding: 20px;
+        }
+        .column {
+            width: 45%;
+        }
+        .item {
+            margin-bottom: 15px;
+        }
+        img {
+            width: 100px;
+            height: auto;
+            display: block;
+        }
+    </style>
 </head>
 <body>
 <h1>Guess</h1>
-<button onclick="window.location.href='Map.html'">Map</button>
-<button onclick="window.location.href='Retry.html'">Wrong</button>
-<button onclick="window.location.href='Win.html'">Correct</button>
+
+<div class="container">
+    <!-- Suspect selection (left side) -->
+    <div class="column">
+        <h2>Suspects</h2>
+        <label class="item">
+            <input type="radio" name="suspect" value="suspect1">
+            <img src="suspect1.jpg" alt="Suspect 1">
+        </label>
+        <label class="item">
+            <input type="radio" name="suspect" value="suspect2">
+            <img src="suspect2.jpg" alt="Suspect 2">
+        </label>
+        <label class="item">
+            <input type="radio" name="suspect" value="suspect3">
+            <img src="suspect3.jpg" alt="Suspect 3">
+        </label>
+    </div>
+
+    <!-- Weapon selection (right side) -->
+    <div class="column">
+        <h2>Weapons</h2>
+        <label class="item">
+            <input type="checkbox" name="weapon" value="knife">
+            <img src="knife.jpg" alt="Knife">
+        </label>
+        <label class="item">
+            <input type="checkbox" name="weapon" value="gun">
+            <img src="gun.jpg" alt="Gun">
+        </label>
+        <label class="item">
+            <input type="checkbox" name="weapon" value="rope">
+            <img src="rope.jpg" alt="Rope">
+        </label>
+        <!-- Add more weapons as needed -->
+    </div>
+</div>
+
+<div style="text-align: center;">
+    <button onclick="window.location.href='Map.html'">Map</button>
+    <button onclick="window.location.href='Retry.html'">Wrong</button>
+    <button onclick="window.location.href='Win.html'">Correct</button>
+</div>
 </body>
 </html>
