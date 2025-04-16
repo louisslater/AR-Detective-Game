@@ -6,9 +6,9 @@
     <title>AR</title>
 
     <script>
-        function addItemAndNavigate() {
+        function addItemAndNavigate(weapon) {
             let items = JSON.parse(localStorage.getItem('items')) || []; // Get existing items or start a new list
-            items.push('knife'); // Add a new item
+            items.push(weapon); // Add a new item
             localStorage.setItem('items', JSON.stringify(items)); // Save updated list
             window.location.href = 'Inventory.html'; // Navigate to inventory page
         }
@@ -17,6 +17,6 @@
 </head>
 <body>
 <button onclick="window.location.href='Map.html'">Map</button>
-<button onclick="addItemAndNavigate()">Add</button>
+<button onclick="addItemAndNavigate('knife')">Add Knife</button>
 </body>
 </html>
