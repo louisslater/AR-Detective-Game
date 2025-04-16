@@ -29,14 +29,14 @@
             }
         }
 
-                function removeWeapon(index) {
-                    let weapons = JSON.parse(localStorage.getItem('weapons')) || [];
-                    weapons.splice(index, 1); // Remove item at the given index
-                    localStorage.setItem('weapons', JSON.stringify(weapons)); // Update localStorage
-                    loadWeapons(); // Reload the weapons list
-                }
+        function removeWeapon(index) {
+            let weapons = JSON.parse(localStorage.getItem('weapons')) || [];
+            weapons.splice(index, 1); // Remove item at the given index
+            localStorage.setItem('weapons', JSON.stringify(weapons)); // Update localStorage
+            loadWeapons(); // Reload the weapons list
+        }
 
-                window.onload = loadWeapons; // Load weapons when the page opens
+        window.onload = loadWeapons; // Load weapons when the page opens
     </script>
 </head>
 <body>
