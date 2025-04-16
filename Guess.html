@@ -54,9 +54,9 @@
     }
     function guess() {
         //alert(localStorage.getItem('correctSuspect') + " " + localStorage.getItem('correctWeapon'));
-        let suspect = document.QuerySelector('input[name="suspect"]:checked');
+        let suspect = document.QuerySelector('input[name="suspect"]:checked').value;
         alert(suspect);
-        let weapon = document.QuerySelector('input[name="weapon"]:checked');
+        let weapon = document.QuerySelector('input[name="weapon"]:checked').value;
         alert(weapon);
         if(suspect == localStorage.getItem('correctSuspect') && weapon == localStorage.getItem('correctWeapon')) {
             alert("correct guess!");
