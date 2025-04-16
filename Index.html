@@ -5,9 +5,16 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Start Page</title>
+    <script>
+        function initGame() {
+            localStorage.setItem('weapons', "");
+            localStorage.setItem('suspects', JSON.stringify("Bob", "Fred", "John");
+            window.location.href = 'Map.html'; // Navigate to inventory page
+        }
+    </script>
 </head>
 <body>
 <h1>Welcome</h1>
-<button onclick="window.location.href='Map.html'">Start</button>
+<button onclick="initGame()">Start</button>
 </body>
 </html>
