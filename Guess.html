@@ -27,7 +27,7 @@
     function loadWeapons() {
         let weapons = JSON.parse(localStorage.getItem('weapons')) || []; // Get weapons from localStorage
         console.log("Loaded weapons:", weapons); // Log weapons to see if they are fetched correctly
-        let itemList = document.getElementById('itemList');
+        let itemList = document.getElementById('weaponList');
         itemList.innerHTML = ''; // Clear the previous list
 
         if (weapons.length === 0) {
@@ -41,7 +41,29 @@
             });
         }
     }
-    window.onload = loadWeapons; // Load weapons when the page opens
+    function loadSuspects() {
+        let suspects = JSON.parse(localStorage.getItem('suspects')) || []; // Get suspects from localStorage
+        console.log("Loaded suspects:", suspects); // Log suspects to see if they are fetched correctly
+        let itemList = document.getElementById('suspectList');
+        itemList.innerHTML = ''; // Clear the previous list
+
+        if (suspects.length === 0) {
+            itemList.innerHTML = '<p>No suspects added yet.</p>';
+        } else {
+            suspects.forEach((item, index) => {
+                let li = document.createElement('li');
+                li.innerHTML = "<label class='item'><input type='radio' name='suspect' value='" + item + "'><img src='assets/images/" + item + ".png'></label>";
+
+                itemList.appendChild(li);
+            });
+        }
+    }
+    function loadAll() {
+        loadWeapons();
+        loadSuspects();
+    }
+
+    window.onload = loadAll; // Load weapons when the page opens
 </script>
 <body>
 <h1>Guess</h1>
@@ -50,18 +72,19 @@
     <!-- Suspect selection (left side) -->
     <div class="column">
         <h2>Suspects</h2>
-        <label class="item">
-            <input type="radio" name="suspect" value="Bob">
-            <img src="assets/images/bob.png" alt="Suspect 1">
-        </label>
-        <label class="item">
-            <input type="radio" name="suspect" value="Fred">
-            <img src="assets/images/fred.png" alt="Suspect 2">
-        </label>
-        <label class="item">
-            <input type="radio" name="suspect" value="John">
-            <img src="assets/images/john.png" alt="Suspect 3">
-        </label>
+        <ul id="suspectList"></ul>
+<!--        <label class="item">-->
+<!--            <input type="radio" name="suspect" value="Bob">-->
+<!--            <img src="assets/images/bob.png" alt="Suspect 1">-->
+<!--        </label>-->
+<!--        <label class="item">-->
+<!--            <input type="radio" name="suspect" value="Fred">-->
+<!--            <img src="assets/images/fred.png" alt="Suspect 2">-->
+<!--        </label>-->
+<!--        <label class="item">-->
+<!--            <input type="radio" name="suspect" value="John">-->
+<!--            <img src="assets/images/john.png" alt="Suspect 3">-->
+<!--        </label>-->
     </div>
 
     <!-- Weapon selection (right side) -->
@@ -81,7 +104,7 @@
 <!--        </label>-->
         <!-- Add more weapons as needed -->
 
-        <ul id="itemList"></ul>
+        <ul id="weaponList"></ul>
     </div>
 </div>
 
