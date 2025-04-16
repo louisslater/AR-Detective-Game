@@ -23,6 +23,26 @@
         }
     </style>
 </head>
+<script>
+    function loadWeapons() {
+        let weapons = JSON.parse(localStorage.getItem('weapons')) || []; // Get weapons from localStorage
+        console.log("Loaded weapons:", weapons); // Log weapons to see if they are fetched correctly
+        let itemList = document.getElementById('itemList');
+        itemList.innerHTML = ''; // Clear the previous list
+
+        if (weapons.length === 0) {
+            itemList.innerHTML = '<p>No weapons added yet.</p>';
+        } else {
+            weapons.forEach((item, index) => {
+                let li = document.createElement('li');
+                li.innerHTML = "<label class='item'><input type='radio' name='weapon' value='" + item + "'><img src='assets/images/" + item + ".png'></label>";
+
+                itemList.appendChild(li);
+            });
+        }
+    }
+    window.onload = loadWeapons; // Load weapons when the page opens
+</script>
 <body>
 <h1>Guess</h1>
 
@@ -47,19 +67,21 @@
     <!-- Weapon selection (right side) -->
     <div class="column">
         <h2>Weapons</h2>
-        <label class="item">
-            <input type="radio" name="weapon" value="knife">
-            <img src="assets/images/knife.png" alt="knife">
-        </label>
-        <label class="item">
-            <input type="radio" name="weapon" value="pistol">
-            <img src="assets/images/pistol.png" alt="pistol">
-        </label>
-        <label class="item">
-            <input type="radio" name="weapon" value="candlestick">
-            <img src="assets/images/candlestick.png" alt="candlestick">
-        </label>
+<!--        <label class="item">-->
+<!--            <input type="radio" name="weapon" value="knife">-->
+<!--            <img src="assets/images/knife.png" alt="knife">-->
+<!--        </label>-->
+<!--        <label class="item">-->
+<!--            <input type="radio" name="weapon" value="pistol">-->
+<!--            <img src="assets/images/pistol.png" alt="pistol">-->
+<!--        </label>-->
+<!--        <label class="item">-->
+<!--            <input type="radio" name="weapon" value="candlestick">-->
+<!--            <img src="assets/images/candlestick.png" alt="candlestick">-->
+<!--        </label>-->
         <!-- Add more weapons as needed -->
+
+        <ul id="itemList"></ul>
     </div>
 </div>
 
