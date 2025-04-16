@@ -7,8 +7,20 @@
     <title>Start Page</title>
     <script>
         function initGame() {
+            //game start
+
+            allSuspects = ["bob", "fred", "john"];
+            allWeapons = ["knife", "pistol", "candlestick"];
+
+            //reset inventory
             localStorage.setItem('weapons', null);
-            localStorage.setItem('suspects', JSON.stringify(["bob", "fred", "john"]));
+            localStorage.setItem('suspects', JSON.stringify(allSuspects));
+
+            localStorage.setItem('correctSuspect', allSuspects[Math.floor(Math.random * 3)]);
+            localStorage.setItem('correctWeapon', allWeapons[Math.floor(Math.random * 3)]);
+
+            alert(localStorage.getItem('correctSuspect') + " " + localStorage.getItem('correctWeapon'));
+
             window.location.href = 'Map.html'; // Navigate to inventory page
         }
     </script>
