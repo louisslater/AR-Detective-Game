@@ -7,10 +7,12 @@
 
     <script>
         function addItemAndNavigate(weapon) {
-            let items = JSON.parse(localStorage.getItem('items')) || []; // Get existing items or start a new list
-            items.push(weapon); // Add a new item
-            localStorage.setItem('items', JSON.stringify(items)); // Save updated list
-            window.location.href = 'Inventory.html'; // Navigate to inventory page
+            let weapons = JSON.parse(localStorage.getItem('weapons')) || []; // Get existing weapons or start a new list
+            if(!weapons.includes(weapon)) {
+                weapons.push(weapon); // Add a new item
+                localStorage.setItem('weapons', JSON.stringify(weapons)); // Save updated list
+                window.location.href = 'Inventory.html'; // Navigate to inventory page
+            }
         }
     </script>
 

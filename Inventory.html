@@ -5,16 +5,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Inventory</title>
     <script>
-        function loadItems() {
-            let items = JSON.parse(localStorage.getItem('items')) || []; // Get items from localStorage
-            console.log("Loaded items:", items); // Log items to see if they are fetched correctly
+        function loadWeapons() {
+            let weapons = JSON.parse(localStorage.getItem('weapons')) || []; // Get weapons from localStorage
+            console.log("Loaded weapons:", weapons); // Log weapons to see if they are fetched correctly
             let itemList = document.getElementById('itemList');
             itemList.innerHTML = ''; // Clear the previous list
 
-            if (items.length === 0) {
-                itemList.innerHTML = '<p>No items added yet.</p>';
+            if (weapons.length === 0) {
+                itemList.innerHTML = '<p>No weapons added yet.</p>';
             } else {
-                items.forEach((item, index) => {
+                weapons.forEach((item, index) => {
                     let li = document.createElement('li');
                     li.innerHTML = "<img src='assets/images/" + item + ".png'>";
 
@@ -29,19 +29,19 @@
             }
         }
 
-                function removeItem(index) {
-                    let items = JSON.parse(localStorage.getItem('items')) || [];
-                    items.splice(index, 1); // Remove item at the given index
-                    localStorage.setItem('items', JSON.stringify(items)); // Update localStorage
-                    loadItems(); // Reload the items list
+                function removeWeapon(index) {
+                    let weapons = JSON.parse(localStorage.getItem('weapons')) || [];
+                    weapons.splice(index, 1); // Remove item at the given index
+                    localStorage.setItem('weapons', JSON.stringify(weapons)); // Update localStorage
+                    loadWeapons(); // Reload the weapons list
                 }
 
-                window.onload = loadItems; // Load items when the page opens
+                window.onload = loadWeapons; // Load weapons when the page opens
     </script>
 </head>
 <body>
 <h1>Inventory</h1>
-<ul id="itemList"></ul> <!-- This is where the items will be listed -->
+<ul id="itemList"></ul> <!-- This is where the weapons will be listed -->
 <button onclick="window.location.href='Map.html'">Map</button>
 </body>
 </html>
