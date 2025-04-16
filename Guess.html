@@ -34,10 +34,7 @@
             itemList.innerHTML = '<p>No weapons added yet.</p>';
         } else {
             weapons.forEach((item, index) => {
-                let li = document.createElement('li');
-                li.innerHTML = "<label class='item'><input type='radio' id='weapon' name='weapon' value='" + item + "'><img src='assets/images/" + item + ".png'></label>";
-
-                itemList.appendChild(li);
+                itemList.innerHTML += "<label class='item'><input type='radio' id='weapon' name='weapon' value='" + item + "'><img src='assets/images/" + item + ".png'></label>";
             });
         }
     }
@@ -51,10 +48,7 @@
             itemList.innerHTML = '<p>No suspects added yet.</p>';
         } else {
             suspects.forEach((item, index) => {
-                let li = document.createElement('li');
-                li.innerHTML = "<label class='item'><input type='radio' id='suspect' name='suspect' value='" + item + "'><img src='assets/images/" + item + ".png'></label>";
-
-                itemList.appendChild(li);
+                itemList.innerHTML += "<label class='item'><input type='radio' id='suspect' name='suspect' value='" + item + "'><img src='assets/images/" + item + ".png'></label>";
             });
         }
     }
