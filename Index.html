@@ -8,7 +8,7 @@
     <script>
         function initGame() {
             localStorage.setItem('weapons', null);
-            localStorage.setItem('suspects', JSON.stringify("bob", "fred", "john"));
+            localStorage.setItem('suspects', JSON.stringify(["bob", "fred", "john"]));
             window.location.href = 'Map.html'; // Navigate to inventory page
         }
     </script>
