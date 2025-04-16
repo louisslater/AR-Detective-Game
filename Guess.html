@@ -54,9 +54,9 @@
     }
     function guess() {
         //alert(localStorage.getItem('correctSuspect') + " " + localStorage.getItem('correctWeapon'));
-        let suspect = document.getElementById('suspect').value;
+        let suspect = document.getElementByName('suspect').value;
         alert(suspect);
-        let weapon = document.getElementById('weapon').value;
+        let weapon = document.getElementByName('weapon').value;
         alert(weapon);
         if(suspect == localStorage.getItem('correctSuspect') && weapon == localStorage.getItem('correctWeapon')) {
             alert("correct guess!");
@@ -79,39 +79,13 @@
     <!-- Suspect selection (left side) -->
     <div class="column">
         <h2>Suspects</h2>
-        <ul id="suspectList"></ul>
-<!--        <label class="item">-->
-<!--            <input type="radio" name="suspect" value="Bob">-->
-<!--            <img src="assets/images/bob.png" alt="Suspect 1">-->
-<!--        </label>-->
-<!--        <label class="item">-->
-<!--            <input type="radio" name="suspect" value="Fred">-->
-<!--            <img src="assets/images/fred.png" alt="Suspect 2">-->
-<!--        </label>-->
-<!--        <label class="item">-->
-<!--            <input type="radio" name="suspect" value="John">-->
-<!--            <img src="assets/images/john.png" alt="Suspect 3">-->
-<!--        </label>-->
+        <div id="suspectList"></div>
     </div>
 
     <!-- Weapon selection (right side) -->
     <div class="column">
         <h2>Weapons</h2>
-<!--        <label class="item">-->
-<!--            <input type="radio" name="weapon" value="knife">-->
-<!--            <img src="assets/images/knife.png" alt="knife">-->
-<!--        </label>-->
-<!--        <label class="item">-->
-<!--            <input type="radio" name="weapon" value="pistol">-->
-<!--            <img src="assets/images/pistol.png" alt="pistol">-->
-<!--        </label>-->
-<!--        <label class="item">-->
-<!--            <input type="radio" name="weapon" value="candlestick">-->
-<!--            <img src="assets/images/candlestick.png" alt="candlestick">-->
-<!--        </label>-->
-        <!-- Add more weapons as needed -->
-
-        <ul id="weaponList"></ul>
+        <div id="weaponList"></div>
     </div>
 </div>
 
