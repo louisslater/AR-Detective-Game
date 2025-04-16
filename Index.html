@@ -16,8 +16,8 @@
             localStorage.setItem('weapons', null);
             localStorage.setItem('suspects', JSON.stringify(allSuspects));
 
-            localStorage.setItem('correctSuspect', allSuspects[Math.floor(Math.random * 3)]);
-            localStorage.setItem('correctWeapon', allWeapons[Math.floor(Math.random * 3)]);
+            localStorage.setItem('correctSuspect', allSuspects[Math.floor(Math.random() * 3)]);
+            localStorage.setItem('correctWeapon', allWeapons[Math.floor(Math.random() * 3)]);
 
             alert(localStorage.getItem('correctSuspect') + " " + localStorage.getItem('correctWeapon'));
 
