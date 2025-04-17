@@ -58,6 +58,8 @@
         alert(suspect);
         let weapon = document.querySelector('input[name="weapon"]:checked').value;
         alert(weapon);
+        alert(localStorage.getItem('correctSuspect'));
+        alert(localStorage.getItem('correctWeapon'));
         if(suspect == localStorage.getItem('correctSuspect') && weapon == localStorage.getItem('correctWeapon')) {
             alert("correct guess!");
         }
@@ -71,7 +73,7 @@
     }
 
     window.onload = loadAll; // Load weapons when the page opens
-</script>
+    <img src="assets/images/fred.png" height="250" width="250"/></script>
 <body>
 <h1>Guess</h1>
 
