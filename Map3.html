@@ -174,13 +174,13 @@
                 locs[gameLoc.weaponId].setAttribute('visible', 'false');
 
             if (distance <= radius) {
-                if(gameLoc.weapon) //weapon
+                if (gameLoc.weapon) //weapon
                     locs[gameLoc.weaponId].setAttribute('visible', 'true');
                     showAR = true;
-                    addWeapon(gameLoc.weapon) //add weapon automatically when in radius
+                    addWeapon(gameLoc.weapon); //add weapon automatically when in radius
                 else //crime scene
                     coordsDiv.textContent = gameLoc.scene; // show on screen
-                    setScene(gameLoc.scene)
+                    setScene(gameLoc.scene);
             }
         });
 
