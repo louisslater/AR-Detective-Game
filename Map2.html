@@ -157,6 +157,7 @@
 
         // Check distance to each target
         let showAR = false;
+        localStorage.setItem('weapon', null);
         targets.forEach(target => {
             const distance = getDistance(lat, long, target.lat, target.long);
             const cube = cubes[target.cubeId];
