@@ -17,7 +17,7 @@
             localStorage.setItem('location', location);
         }
         function addWeaponAndNavigate() {
-            let weapon = localStorage.getItem('weapon')
+            let weapon = localStorage.getItem('weapon');
             alert(weapon);
             let weapons = JSON.parse(localStorage.getItem('weapons')) || []; // Get existing weapons or start a new list
             if(!weapons.includes(weapon)) {
@@ -29,9 +29,9 @@
 
     <style>
         body { margin: 0; font-family: Arial, sans-serif; }
-        #map { height: 70vh; width: 100%; }
+        #map { height: 50vh; max-height: 50vh!important; width: 100%; }
         #coords { text-align: center; padding: 10px; font-size: 16px; }
-        #ar-container { display: none; height: 70vh; width: 100%; }
+        #ar-container { display: none; max-height: 50vh!important; height: 50vh; width: 100%; }
         #version { position: absolute; top: 5px; left: 5px; font-size: 12px; color: gray; }
     </style>
 </head>
@@ -42,7 +42,7 @@
 <!-- Latitude/Longitude display -->
 <div id="coords">Loading coordinates...</div>
 <!-- AR container -->
-<div id="ar-container" style="display:none">
+<div id="ar-container">
     <a-scene vr-mode-ui="enabled: false" arjs="sourceType: webcam; videoTexture: true; debugUIEnabled: false;">
         <!-- AR camera with GPS -->
         <a-camera gps-camera rotation-reader></a-camera>
@@ -50,8 +50,8 @@
         <a-entity
                 id="cube1"
                 gltf-model="https://louisslater.github.io/AR-Detective-Game/assets/knife/scene.gltf"
-                position="0 -1 -6"
-                scale="2 2 2"
+                position="0 -5 -6"
+                scale="0.5 0.5 0.5"
                 visible="false"
                 static-body>
         </a-entity>
@@ -59,9 +59,8 @@
         <a-entity
                 id="cube2"
                 gltf-model="https://louisslater.github.io/AR-Detective-Game/assets/flintlock_gun/scene.gltf"
-                position="0 -7 -3"
-                scale="5 5 5"
-                gps-entity-place="latitude: 53.0845626; longitude: -0.9566571"
+                position="0 -2 -2"
+                scale="1 1 1"
                 rotation="0 0 0"
                 static-body>
         </a-entity>
@@ -71,14 +70,13 @@
                 gltf-model="https://louisslater.github.io/test-AR-js/assets2/candlestick/scene.gltf"
                 position="0 -10 -3"
                 scale="5 5 5"
-                gps-entity-place="latitude: 53.0845626; longitude: -0.9566571"
                 rotation="0 0 0"
                 static-body>
         </a-entity>
     </a-scene>
 </div>
 
-<div>
+<div id="buttons">
     <button onclick="window.location.href='Inventory.html'">Inventory</button>
     <button onclick="window.location.href='Weapon.html'">Weapon</button>
     <button onclick="window.location.href='Guess.html'">Guess</button>
@@ -92,10 +90,10 @@
     // Three nearby target locations with matching objects
     const targets = [
         { lat: 53.0844322, long: -0.9565116, cubeId: 'cube1', color: 'red', weapon: 'knife'},
-        { lat: 53.0843911, long: -0.9565646, cubeId: 'cube2', color: 'blue', weapon: 'pistol'},
+        { lat: 53.0844471, long: -0.9566132, cubeId: 'cube2', color: 'blue', weapon: 'pistol'},
         { lat: 53.0844544, long: -0.9566229, cubeId: 'cube3', color: 'green', weapon: 'candlestick'}
     ];
-    const radius = 2.5; // Radius in meters
+    const radius = 3; // Radius in meters
 
     // DOM elements
     const mapDiv = document.getElementById('map');
@@ -171,15 +169,19 @@
             }
         });
 
+        buttons =  document.getElementById('buttons');
+
         // Toggle AR or map visibility
         if (showAR) {
             mapDiv.style.display = 'none';
             coordsDiv.style.display = 'none';
             arContainer.style.display = 'block';
+            buttons.style.display = 'block';
         } else {
             mapDiv.style.display = 'block';
             coordsDiv.style.display = 'block';
             arContainer.style.display = 'none';
+            buttons.style.display = 'none';
         }
     }
 
