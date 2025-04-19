@@ -4,11 +4,19 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Map</title>
+    <script>
+        function setLocation(location) {
+            localStorage.setItem('currentLocation', location);
+        }
+    </script>
 </head>
 <body>
 <h1>Map</h1>
 <button onclick="window.location.href='Inventory.html'">Inventory</button>
 <button onclick="window.location.href='Weapon.html'">Weapon</button>
 <button onclick="window.location.href='Guess.html'">Guess</button>
+<button onclick="setLocation('church')">Set Location Church</button>
+<button onclick="setLocation('car park')">Set Location Car Park</button>
+<button onclick="setLocation('supermarket')">Set Location Supermarket</button>
 </body>
 </html>

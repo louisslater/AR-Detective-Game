@@ -11,13 +11,16 @@
 
             let allSuspects = ["bob", "fred", "john"];
             let allWeapons = ["knife", "pistol", "candlestick"];
+            let allLocations = ["church", "car park", "supermarket"];
 
             //reset inventory
             localStorage.setItem('weapons', null);
             localStorage.setItem('suspects', JSON.stringify(allSuspects));
+            localStorage.setItem('location', null)
 
             localStorage.setItem('correctSuspect', allSuspects[Math.floor(Math.random() * 3)]);
             localStorage.setItem('correctWeapon', allWeapons[Math.floor(Math.random() * 3)]);
+            localStorage.setItem('correctLocation', allLocations[Math.floor(Math.random() * 3)]);
 
             alert(localStorage.getItem('correctSuspect') + " " + localStorage.getItem('correctWeapon'));
 

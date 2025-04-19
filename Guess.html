@@ -24,6 +24,11 @@
     </style>
 </head>
 <script>
+    function loadLocation() {
+        let location = document.getElementById('location');
+        location.innerHTML = "You current location is: " + localStorage.getItem('location');
+    }
+
     function loadWeapons() {
         let weapons = JSON.parse(localStorage.getItem('weapons')) || []; // Get weapons from localStorage
         console.log("Loaded weapons:", weapons); // Log weapons to see if they are fetched correctly
@@ -61,8 +66,8 @@
             window.location.href = 'Win.html';
         }
         else {
-            alert("loser");
-            window.location.href = 'Retry.html';
+            alert("wrong guess, retry");
+            //window.location.href = 'Retry.html';
         }
     }
     function loadAll() {
@@ -74,6 +79,9 @@
     </script>
 <body>
 <h1>Guess</h1>
+
+<div id="location">
+</div>
 
 <div class="container">
     <!-- Suspect selection (left side) -->
