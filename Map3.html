@@ -170,7 +170,8 @@
         let showAR = false;
         //reset
         localStorage.setItem('weapon', null);
-        localStorage.setItem('location', null);
+
+        inScene=false
         gameLocs.forEach(gameLoc => {
             const distance = getDistance(lat, long, gameLoc.lat, gameLoc.long);
             if(gameLoc.weapon) // is weapon
@@ -183,12 +184,15 @@
                     addWeapon(gameLoc.weapon); //add weapon automatically when in radius
                 }
                 else { //crime scene
+                    inScene=true
                     coordsDiv.textContent = gameLoc.scene; // show on screen
                     setScene(gameLoc.scene);
                 }
             }
         });
 
+        if (!inScene)
+            localStorage.setItem('location', null);
         buttons =  document.getElementById('buttons');
 
         // Toggle AR or map visibility
