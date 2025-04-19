@@ -22,7 +22,7 @@
             localStorage.setItem('correctWeapon', allWeapons[Math.floor(Math.random() * 3)]);
             localStorage.setItem('correctLocation', allLocations[Math.floor(Math.random() * 3)]);
 
-            alert(localStorage.getItem('correctSuspect') + " " + localStorage.getItem('correctWeapon'));
+            alert(localStorage.getItem('correctSuspect') + " " + localStorage.getItem('correctWeapon') + " " + localStorage.getItem('correctLocation'));
 
             window.location.href = 'Map.html'; // Navigate to inventory page
         }
