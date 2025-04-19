@@ -115,18 +115,18 @@
     "images" : [
         {
             "mimeType" : "image/png",
-            "name" : "lambert1_normal.png",
-            "uri" : "../../IdeaProjects/AR-Detective-Game/assets/flintlock_gun/textures/lambert1_normal.png"
+            "name" : "lambert1_normal",
+            "uri" : "textures/lambert1_normal.png"
         },
         {
             "mimeType" : "image/png",
-            "name" : "lambert1_baseColor.png",
-            "uri" : "../../IdeaProjects/AR-Detective-Game/assets/flintlock_gun/textures/lambert1_baseColor.png"
+            "name" : "lambert1_baseColor",
+            "uri" : "textures/lambert1_baseColor.png"
         },
         {
             "mimeType" : "image/png",
-            "name" : "lambert1_metallicRoughness.png",
-            "uri" : "../../IdeaProjects/AR-Detective-Game/assets/flintlock_gun/textures/lambert1_metallicRoughness.png"
+            "name" : "lambert1_metallicRoughness",
+            "uri" : "textures/lambert1_metallicRoughness.png"
         }
     ],
     "accessors" : [
