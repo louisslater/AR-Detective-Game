@@ -173,18 +173,19 @@
         buttons =  document.getElementById('buttons');
 
         // Toggle AR or map visibility
-        /*if (showAR) {
+        if (showAR) {
             mapDiv.style.display = 'none';
-            coordsDiv.style.display = 'none';
+            //coordsDiv.style.display = 'none';
             arContainer.style.display = 'block';
-            buttons.style.display = 'block';
+            //buttons.style.display = 'block';
+            coordsDiv.textContent = target.weapon;
         } else {
             mapDiv.style.display = 'block';
-            coordsDiv.style.display = 'block';
+            //coordsDiv.style.display = 'block';
             arContainer.style.display = 'none';
-            buttons.style.display = 'none';
+            //buttons.style.display = 'none';
         }
-        */
+
     }
 
     // Handle GPS errors
