@@ -14,9 +14,11 @@
 
     <script>
 
+        //set the crime scene
         function setScene(scene) {
             localStorage.setItem('location', scene);
         }
+
         // add weapon and tell user, if it hasn't already been added
         function addWeapon(weapon) {
             localStorage.setItem('weapon', weapon);
@@ -49,7 +51,7 @@
         <!-- AR camera with GPS -->
         <a-camera gps-camera rotation-reader></a-camera>
         <a-entity
-                id="cube1"
+                id="weapon1"
                 gltf-model="https://louisslater.github.io/AR-Detective-Game/assets/knife/scene.gltf"
                 position="0 -5 -6"
                 scale="0.5 0.5 0.5"
@@ -58,7 +60,7 @@
                 static-body>
         </a-entity>
         <a-entity
-                id="cube2"
+                id="weapon2"
                 gltf-model="https://louisslater.github.io/AR-Detective-Game/assets/flintlock_gun/scene.gltf"
                 position="0 -2 -2"
                 scale="1 1 1"
@@ -67,7 +69,7 @@
                 static-body>
         </a-entity>
         <a-entity
-                id="cube3"
+                id="weapon3"
                 gltf-model="https://louisslater.github.io/test-AR-js/assets2/candlestick/scene.gltf"
                 position="0 -5 -3"
                 scale="5 5 5"
@@ -89,11 +91,11 @@
 </div>
 
 <script>
-    // Three nearby target locations with matching objects
+    // the locations of the weapons and crime scenes
     const gameLocs = [
-        { lat: 53.0844322, long: -0.9565100, cubeId: 'cube1', color: 'red', weapon: 'knife'},
-        { lat: 53.0844322, long: -0.9566150, cubeId: 'cube2', color: 'orange', weapon: 'pistol'},
-        { lat: 53.0844322, long: -0.9567200, cubeId: 'cube3', color: 'yellow', weapon: 'candlestick'},
+        { lat: 53.0844322, long: -0.9565100, weaponId: 'weapon1', color: 'red', weapon: 'knife'},
+        { lat: 53.0844322, long: -0.9566150, weaponId: 'weapon2', color: 'orange', weapon: 'pistol'},
+        { lat: 53.0844322, long: -0.9567200, weaponId: 'weapon3', color: 'yellow', weapon: 'candlestick'},
         { lat: 53.0844422, long: -0.9565100, color: 'green', scene: 'church'},
         { lat: 53.0844422, long: -0.9566150, color: 'blue', scene: 'car park'},
         { lat: 53.0844422, long: -0.9567200, color: 'purple', scene: 'supermarket'}
@@ -105,9 +107,9 @@
     const coordsDiv = document.getElementById('coords');
     const arContainer = document.getElementById('ar-container');
     const locs = {
-        cube1: document.getElementById('cube1'),
-        cube2: document.getElementById('cube2'),
-        cube3: document.getElementById('cube3')
+        weapon1: document.getElementById('weapon1'),
+        weapon2: document.getElementById('weapon2'),
+        weapon3: document.getElementById('weapon3')
     };
 
     // Initialize Leaflet map, centered on first target
@@ -163,18 +165,21 @@
         //loop through locations for weapons and crime scenes to see if we're in one
         //if it has a weapon property it's a weapon else it's a crime scene location
         let showAR = false;
+        //reset
         localStorage.setItem('weapon', null);
         localStorage.setItem('location', null);
         gameLocs.forEach(gameLoc => {
             const distance = getDistance(lat, long, gameLoc.lat, gameLoc.long);
-            locs[gameLoc.cubeId].setAttribute('visible', 'false');
+            if(gameLoc.weapon) // is weapon
+                locs[gameLoc.weaponId].setAttribute('visible', 'false');
+
             if (distance <= radius) {
-                if(gameLoc.weapon) // weapon
-                    locs[gameLoc.cubeId].setAttribute('visible', 'true');
+                if(gameLoc.weapon) //weapon
+                    locs[gameLoc.weaponId].setAttribute('visible', 'true');
                     showAR = true;
-                    addWeapon(gameLoc.weapon)
+                    addWeapon(gameLoc.weapon) //add weapon automatically when in radius
                 else //crime scene
-                    coordsDiv.textContent = gameLoc.scene;
+                    coordsDiv.textContent = gameLoc.scene; // show on screen
                     setScene(gameLoc.scene)
             }
         });
