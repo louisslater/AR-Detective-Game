@@ -18,6 +18,7 @@
         }
         function addWeaponAndNavigate() {
             let weapon = localStorage.getItem('weapon')
+            alert(weapon);
             let weapons = JSON.parse(localStorage.getItem('weapons')) || []; // Get existing weapons or start a new list
             if(!weapons.includes(weapon)) {
                 weapons.push(weapon); // Add a new item
@@ -48,7 +49,7 @@
         <!-- Duck instead of Red Cube -->
         <a-entity
                 id="cube1"
-                gltf-model="https://raw.githubusercontent.com/KhronosGroup/glTF-Sample-Models/master/2.0/Duck/glTF/Duck.gltf"
+                gltf-model="https://louisslater.github.io/AR-Detective-Game/assets/knife/scene.gltf"
                 position="0 -1 -6"
                 scale="2 2 2"
                 visible="false"
@@ -57,7 +58,7 @@
         <!-- Cube 2: Blue -->
         <a-entity
                 id="cube2"
-                gltf-model="https://louisslater.github.io/test-AR-js/assets2/candlestick/scene.gltf"
+                gltf-model="https://louisslater.github.io/AR-Detective-Game/assets/flintlock_gun/scene.gltf"
                 position="0 -7 -3"
                 scale="5 5 5"
                 gps-entity-place="latitude: 53.0845626; longitude: -0.9566571"
@@ -67,7 +68,7 @@
         <!-- Cube 3: Green -->
         <a-entity
                 id="cube3"
-                gltf-model="https://louisslater.github.io/test-AR-js/assets2/knife/scene.gltf"
+                gltf-model="https://louisslater.github.io/test-AR-js/assets2/candlestick/scene.gltf"
                 position="0 -10 -3"
                 scale="5 5 5"
                 gps-entity-place="latitude: 53.0845626; longitude: -0.9566571"
@@ -164,7 +165,6 @@
             if (distance <= radius) {
                 cube.setAttribute('visible', 'true');
                 localStorage.setItem('weapon', target.weapon);
-                alert(target.weapon);
                 showAR = true;
             } else {
                 cube.setAttribute('visible', 'false');
