@@ -16,6 +16,14 @@
         function setLocation(location) {
             localStorage.setItem('location', location);
         }
+        function addWeaponAndNavigate() {
+            let weapon = localStorage.getItem('weapon')
+            let weapons = JSON.parse(localStorage.getItem('weapons')) || []; // Get existing weapons or start a new list
+            if(!weapons.includes(weapon)) {
+                weapons.push(weapon); // Add a new item
+                localStorage.setItem('weapons', JSON.stringify(weapons)); // Save updated list
+            }
+        }
     </script>
 
     <style>
@@ -76,16 +84,17 @@
     <button onclick="setLocation('church')">Set Location Church</button>
     <button onclick="setLocation('car park')">Set Location Car Park</button>
     <button onclick="setLocation('supermarket')">Set Location Supermarket</button>
+    <button onclick="addWeaponAndNavigate()">Add Weapon GPS</button>
 </div>
 
 <script>
     // Three nearby target locations with matching objects
     const targets = [
-        { lat: 53.0844322, long: -0.9565116, cubeId: 'cube1', color: 'red' },    // Duck (was red cube)
-        { lat: 53.0843911, long: -0.9565646, cubeId: 'cube2', color: 'blue' },   // Blue cube
-        { lat: 53.0844544, long: -0.9566229, cubeId: 'cube3', color: 'green' }   // Green cube
+        { lat: 53.0844322, long: -0.9565116, cubeId: 'cube1', color: 'red', weapon: 'knife'},
+        { lat: 53.0843911, long: -0.9565646, cubeId: 'cube2', color: 'blue', weapon: 'pistol'},
+        { lat: 53.0844544, long: -0.9566229, cubeId: 'cube3', color: 'green', weapon: 'candlestick'}
     ];
-    const radius = 2; // Radius in meters
+    const radius = 3; // Radius in meters
 
     // DOM elements
     const mapDiv = document.getElementById('map');
@@ -154,6 +163,8 @@
             const cube = cubes[target.cubeId];
             if (distance <= radius) {
                 cube.setAttribute('visible', 'true');
+                localStorage.setItem('weapon', target.weapon);
+                alert(target.weapon);
                 showAR = true;
             } else {
                 cube.setAttribute('visible', 'false');
