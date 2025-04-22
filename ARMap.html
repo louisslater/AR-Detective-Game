@@ -220,7 +220,7 @@
     }
 
     // set visibility of buttons
-    let isTest = localStorage.getItem('test');
+    let isTest = (localStorage.getItem('test')==true);
     let inLocation = (localStorage.getItem('location')==null);
     document.querySelectorAll('.in-location').forEach(btn => {
           if(inLocation || isTest)
@@ -230,10 +230,10 @@
     });
 
     document.querySelectorAll('.show-if-test').forEach(btn => {
-      if (isTest) {
-        btn.style.display = 'inline-block';
-      else
-        btn.style.display = 'none';
+          if (isTest) {
+              btn.style.display = 'inline-block';
+          else
+              btn.style.display = 'none';
     });
 
 
