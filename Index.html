@@ -4,20 +4,41 @@
 <head>
     <style>
         html, body {
-        height: 100%;
-        margin: 0;
-        padding: 0;
-        }
-
-        body {
-            background-image: url('assets/images/main_menu.png'); /* Replace with your actual image file */
-            background-size: cover; /* Ensures the image covers the whole screen */
-            background-repeat: no-repeat; /* Prevents the image from repeating */
-            background-position: center; /* Centres the image on the page */
+            height: 100%;
             margin: 0;
             padding: 0;
+            background-image: url('assets/images/main_menu.png'); /* Your background image */
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-position: center;
             font-family: sans-serif;
-            colour: white; /* Optional: change text colour for readability */
+            color: white;
+        }
+
+        h1 {
+            text-align: center;
+            margin-top: 120px; /* Moves text further down */
+            font-size: 2.5em;
+            text-shadow: 2px 2px 4px #000;
+        }
+
+        button {
+            display: block;
+            margin: 40px auto;
+            padding: 20px 40px;
+            font-size: 1.5em;
+            background: linear-gradient(135deg, #4b6cb7, #182848); /* blue-purple gradient */
+            border: none;
+            border-radius: 10px;
+            colour: white;
+            colour: white;
+            cursor: pointer;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.4);
+            transition: transform 0.2s ease;
+        }
+
+        button:hover {
+            transform: scale(1.05);
         }
     </style>
     <meta charset="UTF-8">
