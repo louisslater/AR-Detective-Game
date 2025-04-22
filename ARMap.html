@@ -220,8 +220,8 @@
     }
 
     // set visibility of buttons
-    let isTest = (localStorage.getItem('test')==true);
-    let inLocation = (localStorage.getItem('location')==null);
+    let isTest = (localStorage.getItem('test') === true);
+    let inLocation = (localStorage.getItem('location') !== null);
     document.querySelectorAll('.in-location').forEach(btn => {
           if(inLocation || isTest)
                btn.style.display = 'inline-block';
