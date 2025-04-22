@@ -45,7 +45,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Start Page</title>
     <script>
-        function initGame() {
+        function initGame(mode) {
             //game start
 
             let allSuspects = ["bob", "fred", "john"];
@@ -61,29 +61,35 @@
             localStorage.setItem('correctWeapon', allWeapons[Math.floor(Math.random() * 3)]);
             localStorage.setItem('correctLocation', allLocations[Math.floor(Math.random() * 3)]);
 
-            //Garden
-            localStorage.setItem('gameLocations', JSON.stringify(
-            [
-                { lat: 53.084418, long: -0.956494, radius: 2, weaponId: 'weapon1', color: 'red', weapon: 'knife'},
-                { lat: 53.084440, long: -0.956567, radius: 2, weaponId: 'weapon2', color: 'orange', weapon: 'pistol'},
-                { lat: 53.084461, long: -0.956607, radius: 2, weaponId: 'weapon3', color: 'yellow', weapon: 'candlestick'},
-                { lat: 53.084373, long: -0.956584, radius: 2, color: 'green', scene: 'church'},
-                { lat: 53.084407, long: -0.956628, radius: 2, color: 'blue', scene: 'car park'},
-                { lat: 53.084440, long: -0.956672, radius: 2, color: 'purple', scene: 'supermarket'}
-            ]));
 
-            //Park
-            localStorage.setItem('gameLocations_X', JSON.stringify(
-            [
-                { lat: 53.087610, long: -0.957739, radius: 3, weaponId: 'weapon1', color: 'red', weapon: 'knife'},
-                { lat: 53.087503, long: -0.957854, radius: 3, weaponId: 'weapon2', color: 'orange', weapon: 'pistol'},
-                { lat: 53.087498, long: -0.957573, radius: 3, weaponId: 'weapon3', color: 'yellow', weapon: 'candlestick'},
-                { lat: 53.087308, long: -0.958063, radius: 3, color: 'green', scene: 'church'},
-                { lat: 53.087348, long: -0.957831, radius: 3, color: 'blue', scene: 'car park'},
-                { lat: 53.087380, long: -0.957595, radius: 3, color: 'purple', scene: 'supermarket'}
-            ]));
+
+            if(mode=='garden') {
+                localStorage.setItem('gameLocations', JSON.stringify(
+                [
+                    { lat: 53.084418, long: -0.956494, radius: 2, weaponId: 'weapon1', color: 'red', weapon: 'knife'},
+                    { lat: 53.084440, long: -0.956567, radius: 2, weaponId: 'weapon2', color: 'orange', weapon: 'pistol'},
+                    { lat: 53.084461, long: -0.956607, radius: 2, weaponId: 'weapon3', color: 'yellow', weapon: 'candlestick'},
+                    { lat: 53.084373, long: -0.956584, radius: 2, color: 'green', scene: 'church'},
+                    { lat: 53.084407, long: -0.956628, radius: 2, color: 'blue', scene: 'car park'},
+                    { lat: 53.084440, long: -0.956672, radius: 2, color: 'purple', scene: 'supermarket'}
+                ]));
+            }
+
+            if(mode=='park') {
+                localStorage.setItem('gameLocations', JSON.stringify(
+                [
+                    { lat: 53.087610, long: -0.957739, radius: 3, weaponId: 'weapon1', color: 'red', weapon: 'knife'},
+                    { lat: 53.087503, long: -0.957854, radius: 3, weaponId: 'weapon2', color: 'orange', weapon: 'pistol'},
+                    { lat: 53.087498, long: -0.957573, radius: 3, weaponId: 'weapon3', color: 'yellow', weapon: 'candlestick'},
+                    { lat: 53.087308, long: -0.958063, radius: 3, color: 'green', scene: 'church'},
+                    { lat: 53.087348, long: -0.957831, radius: 3, color: 'blue', scene: 'car park'},
+                    { lat: 53.087380, long: -0.957595, radius: 3, color: 'purple', scene: 'supermarket'}
+                ]));
+            }
 
             alert(localStorage.getItem('correctSuspect') + " " + localStorage.getItem('correctWeapon') + " " + localStorage.getItem('correctLocation'));
+
+            localStorage.setItem('test', (mode=='test'))
 
             window.location.href = 'ARMap.html'; // Navigate to inventory page
         }
@@ -92,6 +98,8 @@
 </head>
 <body>
 <h1>AR Detective Game</h1>
-<button onclick="initGame()">Start</button>
+<button onclick="initGame('garden')">Start (garden)</button>
+<button onclick="initGame('park')">Start (park)</button>
+<button onclick="initGame('test')">Start (test)</button>
 </body>
 </html>

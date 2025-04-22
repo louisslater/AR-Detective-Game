@@ -79,9 +79,10 @@
 
     window.onload = loadAll; // Load weapons when the page opens
 
-    if (new URLSearchParams(window.location.search).get('test') !== 'true') {
-        document.getElementById('Correct').style.display = 'none';
-        document.getElementById('Wrong').style.display = 'none';
+    if (localStorage.getItem('test') !== true) {
+        document.querySelectorAll('.show-if-test').forEach(btn => {
+          btn.style.display = 'none';
+        });
     }
     </script>
 <body>
@@ -107,8 +108,8 @@
 <div style="text-align: center;">
     <button onclick="window.location.href='ARMap.html'">Map</button>
     <button onclick="guess()">Guess</button>
-    <button id="Wrong" onclick="window.location.href='Retry.html'">Wrong</button>
-    <button id="Correct" onclick="window.location.href='Win.html'">Correct</button>
+    <button class="show-if-test" onclick="window.location.href='Retry.html'">Guess Wrong</button>
+    <button class="show-if-test" onclick="window.location.href='Win.html'">Guess Correct</button>
 </div>
 </body>
 </html>

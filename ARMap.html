@@ -32,6 +32,25 @@
                 alert("You found " + weapon);
             }
         }
+
+        if (localStorage.getItem('test') !== true) {
+            document.getElementById('Correct').style.display = 'none';
+            document.getElementById('Wrong').style.display = 'none';
+        }
+
+        let inLocation = localStorage.getItem('location');
+        document.querySelectorAll('.in-location').forEach(btn => {
+              if(inLocation)
+                   btn.style.display = 'inline-block';
+              else
+                   btn.style.display = 'none';
+        });
+
+        if (localStorage.getItem('test') !== true) {
+            document.querySelectorAll('.show-if-test').forEach(btn => {
+              btn.style.display = 'none';
+            });
+        }
     </script>
 
     <style>
@@ -85,11 +104,11 @@
 
 <div id="buttons">
     <button onclick="window.location.href='Inventory.html'">Inventory</button>
-    <button onclick="window.location.href='Weapon.html'">Weapon</button>
-    <button onclick="window.location.href='Guess.html'">Guess</button>
-    <button onclick="setScene('church')">Set Scene Church</button>
-    <button onclick="setScene('car park')">Set Scene Car Park</button>
-    <button onclick="setScene('supermarket')">Set Scene Supermarket</button>
+    <button class="show-if-test" onclick="window.location.href='Weapon.html'">Weapon</button>
+    <button class="in-location" onclick="window.location.href='Guess.html'">Guess</button>
+    <button class="show-if-test" onclick="setScene('church')">Set Scene Church</button>
+    <button class="show-if-test" onclick="setScene('car park')">Set Scene Car Park</button>
+    <button class="show-if-test" onclick="setScene('supermarket')">Set Scene Supermarket</button>
 <!--    <button onclick="addWeaponAndNavigate()">Add Weapon GPS</button>-->
 </div>
 
@@ -217,6 +236,7 @@
     } else {
         coordsDiv.textContent = "Geolocation not supported.";
     }
+
 </script>
 </body>
 </html>
