@@ -1,156 +1,222 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <title>GPS Map + AR</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GPS Map</title>
+    <!-- Leaflet.js for map -->
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <!-- A-Frame for AR scene -->
     <script src="https://aframe.io/releases/1.6.0/aframe.min.js"></script>
+    <!-- AR.js for location-based AR -->
     <script src="https://raw.githack.com/AR-js-org/AR.js/master/aframe/build/aframe-ar.js"></script>
+
+    <script>
+
+        //set the crime scene
+        function setScene(scene) {
+            if(localStorage.getItem('location') != scene) {
+                localStorage.setItem('location', scene);
+                alert('scene is ' + scene);
+            }
+        }
+
+        // add weapon and tell user, if it hasn't already been added
+        function addWeapon(weapon) {
+            localStorage.setItem('weapon', weapon);
+            let weapons = JSON.parse(localStorage.getItem('weapons')) || []; // Get existing weapons or start a new list
+            if(!weapons.includes(weapon)) {
+                weapons.push(weapon); // Add a new item
+                localStorage.setItem('weapons', JSON.stringify(weapons)); // Save updated list
+                alert("You found " + weapon);
+            }
+        }
+    </script>
+
     <style>
-    body { margin: 0; font-family: Arial, sans-serif; }
-    #map { height: 35vh!important; max-height: 50vh; width: 100%; }
-    #coords { text-align: center; padding: 10px; font-size: 16px; }
-    #ar-container { display: none; height: 50vh; width: 100%; }
-    #version { position: absolute; top: 5px; left: 5px; font-size: 12px; color: gray; }
-    button { margin: 5px; padding: 0.5em 1em; }
-  </style>
+        body { margin: 0; font-family: Arial, sans-serif; }
+        #map { height: 35vh!important; max-height: 50vh; width: 100%; }
+        #coords { text-align: center; padding: 10px; font-size: 16px; }
+        #ar-container { display: none; max-height: 50vh; height: 35vh!important; width: 100%; }
+        #version { position: absolute; top: 5px; left: 5px; font-size: 12px; color: gray; }
+    </style>
 </head>
 <body>
-<div id="version">v06</div>
+<div id="version">v05</div>
+<!-- Map container -->
 <div id="map"></div>
-<div id="coords">Loading...</div>
-<div id="ar-container"></div>
+<!-- Latitude/Longitude display -->
+<div id="coords">Loading coordinates...</div>
+<!-- AR container -->
+<div id="ar-container">
+    <a-scene vr-mode-ui="enabled: false" arjs="sourceType: webcam; videoTexture: true; debugUIEnabled: false;">
+        <!-- AR camera with GPS -->
+        <a-camera gps-camera rotation-reader></a-camera>
+        <a-entity
+                id="weapon1"
+                gltf-model="https://louisslater.github.io/AR-Detective-Game/assets/knife/scene.gltf"
+                position="0 -5 -6"
+                scale="0.5 0.5 0.5"
+                rotation="0 0 0"
+                visible="false"
+                static-body>
+        </a-entity>
+        <a-entity
+                id="weapon2"
+                gltf-model="https://louisslater.github.io/AR-Detective-Game/assets/flintlock_gun/scene.gltf"
+                position="0 -4 -4"
+                scale="2 2 2"
+                rotation="0 0 0"
+                visible="false"
+                static-body>
+        </a-entity>
+        <a-entity
+                id="weapon3"
+                gltf-model="https://louisslater.github.io/test-AR-js/assets2/candlestick/scene.gltf"
+                position="0 -5 -3"
+                scale="5 5 5"
+                rotation="0 0 0"
+                visible="false"
+                static-body>
+        </a-entity>
+    </a-scene>
+</div>
+
 <div id="buttons">
     <button onclick="window.location.href='Inventory.html'">Inventory</button>
     <button onclick="window.location.href='Weapon.html'">Weapon</button>
     <button onclick="window.location.href='Guess.html'">Guess</button>
-    <button onclick="setScene('church')">Scene: Church</button>
-    <button onclick="setScene('car park')">Scene: Car Park</button>
-    <button onclick="setScene('supermarket')">Scene: Supermarket</button>
+    <button onclick="setScene('church')">Set Scene Church</button>
+    <button onclick="setScene('car park')">Set Scene Car Park</button>
+    <button onclick="setScene('supermarket')">Set Scene Supermarket</button>
+<!--    <button onclick="addWeaponAndNavigate()">Add Weapon GPS</button>-->
 </div>
 
 <script>
-  const coordsDiv = document.getElementById('coords');
-  const mapDiv = document.getElementById('map');
-  const arContainer = document.getElementById('ar-container');
-  let isFirstUpdate = true;
-  let arScene = null;
-  let inScene = false;
-  let showAR = false;
+    // the locations of the weapons and crime scenes
+    let gameLocs = JSON.parse(localStorage.getItem('gameLocations'))
 
-  function setScene(scene) {
-    if (localStorage.getItem('location') !== scene) {
-      localStorage.setItem('location', scene);
-      alert('Scene set to: ' + scene);
-    }
-  }
+    // DOM elements
+    const mapDiv = document.getElementById('map');
+    const coordsDiv = document.getElementById('coords');
+    const arContainer = document.getElementById('ar-container');
+    const locs = {
+        weapon1: document.getElementById('weapon1'),
+        weapon2: document.getElementById('weapon2'),
+        weapon3: document.getElementById('weapon3')
+    };
 
-  function addWeapon(weapon) {
-    localStorage.setItem('weapon', weapon);
-    let weapons = JSON.parse(localStorage.getItem('weapons')) || [];
-    if (!weapons.includes(weapon)) {
-      weapons.push(weapon);
-      localStorage.setItem('weapons', JSON.stringify(weapons));
-      alert('You found ' + weapon);
-    }
-  }
-
-  let gameLocs = JSON.parse(localStorage.getItem('gameLocations'));
-  const map = L.map('map').setView([gameLocs[0].lat, gameLocs[0].long], 15);
-  L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-    attribution: '© OpenStreetMap contributors'
-  }).addTo(map);
-  let userMarker = L.marker([0, 0]).addTo(map);
-
-  gameLocs.forEach(loc => {
-    L.circle([loc.lat, loc.long], {
-      color: loc.color,
-      fillColor: loc.color,
-      fillOpacity: 0.5,
-      radius: loc.radius
+    // Initialize Leaflet map, centered on first target
+    const map = L.map('map').setView([gameLocs[0].lat, gameLocs[0].long], 15);
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        attribution: '© OpenStreetMap contributors'
     }).addTo(map);
-  });
+    let userMarker = L.marker([0, 0]).addTo(map); // Your position
 
-  function getDistance(lat1, lon1, lat2, lon2) {
-    const R = 6371e3;
-    const φ1 = lat1 * Math.PI / 180;
-    const φ2 = lat2 * Math.PI / 180;
-    const Δφ = (lat2 - lat1) * Math.PI / 180;
-    const Δλ = (lon2 - lon1) * Math.PI / 180;
-    const a = Math.sin(Δφ/2)**2 + Math.cos(φ1)*Math.cos(φ2)*Math.sin(Δλ/2)**2;
-    const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
-    return R * c;
-  }
-
-  function showARScene(weaponId, modelUrl, position, scale) {
-    arContainer.innerHTML = `
-      <a-scene vr-mode-ui="enabled: false" embedded arjs="sourceType: webcam; videoTexture: true; debugUIEnabled: false;">
-        <a-camera gps-camera rotation-reader></a-camera>
-        <a-entity gltf-model="${modelUrl}"
-                  gps-entity-place
-                  position="${position}"
-                  scale="${scale}"
-                  rotation="0 0 0"
-                  static-body>
-        </a-entity>
-      </a-scene>
-    `;
-  }
-
-  function updatePosition(pos) {
-    const lat = pos.coords.latitude;
-    const lon = pos.coords.longitude;
-    coordsDiv.textContent = `Lat: ${lat.toFixed(6)}, Lon: ${lon.toFixed(6)}`;
-    userMarker.setLatLng([lat, lon]);
-    if (isFirstUpdate) {
-      map.setView([lat, lon], 15);
-      isFirstUpdate = false;
-    }
-
-    inScene = false;
-    showAR = false;
-    localStorage.setItem('weapon', null);
-
-    for (const loc of gameLocs) {
-      const dist = getDistance(lat, lon, loc.lat, loc.long);
-      if (dist <= loc.radius) {
-        if (loc.weapon) {
-          showAR = true;
-          inScene = true;
-          addWeapon(loc.weapon);
-          showARScene(loc.weaponId,
-                      loc.modelUrl,
-                      "0 -5 -5",
-                      loc.scale || "1 1 1");
-        } else {
-          inScene = true;
-          setScene(loc.scene);
-          coordsDiv.textContent = loc.scene;
-        }
-        break;
-      }
-    }
-
-    if (!inScene) localStorage.setItem('location', null);
-    mapDiv.style.display = showAR ? 'none' : 'block';
-    arContainer.style.display = showAR ? 'block' : 'none';
-  }
-
-  function handleError(err) {
-    coordsDiv.textContent = `GPS error: ${err.message}`;
-  }
-
-  if (navigator.geolocation) {
-    navigator.geolocation.watchPosition(updatePosition, handleError, {
-      enableHighAccuracy: true,
-      maximumAge: 0,
-      timeout: 5000
+    // Add colored circles for each target location
+    gameLocs.forEach(target => {
+        L.circle([target.lat, target.long], {
+            color: target.color,          // Outline color matches original designation
+            fillColor: target.color,      // Fill color matches original designation
+            fillOpacity: 0.5,             // Keep some transparency
+            radius: target.radius                // Visual circle size
+        }).addTo(map);
     });
-  } else {
-    coordsDiv.textContent = "Geolocation not supported.";
-  }
+
+    // Haversine formula for distance
+    function getDistance(lat1, lon1, lat2, lon2) {
+        const R = 6371e3; // Earth's radius in meters
+        const φ1 = lat1 * Math.PI / 180;
+        const φ2 = lat2 * Math.PI / 180;
+        const Δφ = (lat2 - lat1) * Math.PI / 180;
+        const Δλ = (lon2 - lon1) * Math.PI / 180;
+        const a = Math.sin(Δφ / 2) * Math.sin(Δφ / 2) +
+                  Math.cos(φ1) * Math.cos(φ2) *
+                  Math.sin(Δλ / 2) * Math.sin(Δλ / 2);
+        const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+        return R * c; // Distance in meters
+    }
+
+    // Track whether this is the first position update
+    let isFirstUpdate = true;
+
+    // Update position
+    function updatePosition(position) {
+        const lat = position.coords.latitude;
+        const long = position.coords.longitude;
+
+        // Update marker position without affecting map view
+        userMarker.setLatLng([lat, long]);
+        if (isFirstUpdate) {
+            // Set initial view with zoom level 15
+            map.setView([lat, long], 15);
+            isFirstUpdate = false;
+        }
+
+        // Update coordinates display
+        coordsDiv.textContent = `Lat: ${lat.toFixed(6)}, Long: ${long.toFixed(6)}`;
+
+        //loop through locations for weapons and crime scenes to see if we're in one
+        //if it has a weapon property it's a weapon else it's a crime scene location
+        let showAR = false;
+        //reset
+        localStorage.setItem('weapon', null);
+
+        inScene=false
+        gameLocs.forEach(gameLoc => {
+            const distance = getDistance(lat, long, gameLoc.lat, gameLoc.long);
+            if(gameLoc.weapon) // is weapon
+                locs[gameLoc.weaponId].setAttribute('visible', 'false');
+
+            if (distance <= gameLoc.radius) {
+                if (gameLoc.weapon) { //weapon
+                    locs[gameLoc.weaponId].setAttribute('visible', 'true');
+                    showAR = true;
+                    addWeapon(gameLoc.weapon); //add weapon automatically when in radius
+                }
+                else { //crime scene
+                    inScene=true
+                    coordsDiv.textContent = gameLoc.scene; // show on screen
+                    setScene(gameLoc.scene);
+                }
+            }
+        });
+
+        if (!inScene)
+            localStorage.setItem('location', null);
+        buttons =  document.getElementById('buttons');
+
+        // Toggle AR or map visibility
+        if (showAR) {
+            mapDiv.style.display = 'none';
+            //coordsDiv.style.display = 'none';
+            arContainer.style.display = 'block';
+            //buttons.style.display = 'block';
+        } else {
+            mapDiv.style.display = 'block';
+            //coordsDiv.style.display = 'block';
+            arContainer.style.display = 'none';
+            //buttons.style.display = 'none';
+        }
+
+    }
+
+    // Handle GPS errors
+    function handleError(error) {
+        coordsDiv.textContent = `Error: ${error.message}`;
+    }
+
+    // Watch position updates
+    if (navigator.geolocation) {
+        navigator.geolocation.watchPosition(updatePosition, handleError, {
+            enableHighAccuracy: true,
+            maximumAge: 0,
+            timeout: 5000
+        });
+    } else {
+        coordsDiv.textContent = "Geolocation not supported.";
+    }
 </script>
 </body>
 </html>
