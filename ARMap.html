@@ -220,15 +220,16 @@
     }
 
     // set visibility of buttons
-    let inLocation = localStorage.getItem('location');
+    let isTest = localStorage.getItem('test');
+    let inLocation = (localStorage.getItem('location')==null);
     document.querySelectorAll('.in-location').forEach(btn => {
-          if(inLocation)
+          if(inLocation || isTest)
                btn.style.display = 'inline-block';
           else
                btn.style.display = 'none';
     });
 
-    if (localStorage.getItem('test') !== true) {
+    if (!isTest) {
         document.querySelectorAll('.show-if-test').forEach(btn => {
           btn.style.display = 'none';
         });
