@@ -39,7 +39,7 @@
             itemList.innerHTML = '<p>No weapons added yet.</p>';
         } else {
             weapons.forEach((item, index) => {
-                itemList.innerHTML += "<label class='item'><input type='radio' name='weapon' value='" + item + "'><img src='assets/images/" + item + ".png'></label>";
+                itemList.innerHTML += "<label class='item'><span>"+ item +"<br></span><input type='radio' name='weapon' value='" + item + "'><img src='assets/images/" + item + ".png'></label>";
             });
         }
     }
