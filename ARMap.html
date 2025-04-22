@@ -33,11 +33,6 @@
             }
         }
 
-        if (localStorage.getItem('test') !== true) {
-            document.getElementById('Correct').style.display = 'none';
-            document.getElementById('Wrong').style.display = 'none';
-        }
-
         let inLocation = localStorage.getItem('location');
         document.querySelectorAll('.in-location').forEach(btn => {
               if(inLocation)
