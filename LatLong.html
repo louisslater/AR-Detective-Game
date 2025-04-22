@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>GPS Location</title>
+    <title>GPS Location (Live)</title>
     <style>
     body {
       font-family: Arial, sans-serif;
@@ -54,14 +54,6 @@
       document.getElementById('location').textContent = "Unable to get location.";
     }
 
-    function getLocation() {
-      if (navigator.geolocation) {
-        navigator.geolocation.getCurrentPosition(showPosition, showError);
-      } else {
-        document.getElementById('location').textContent = "Geolocation not supported.";
-      }
-    }
-
     function copyLocation() {
       if (!currentLatLong) return;
       navigator.clipboard.writeText(currentLatLong).then(() => {
@@ -69,7 +61,16 @@
       });
     }
 
-    getLocation();
+    // Use watchPosition for continuous updates
+    if (navigator.geolocation) {
+      navigator.geolocation.watchPosition(showPosition, showError, {
+        enableHighAccuracy: true,
+        maximumAge: 1000,  // 1 second old data max
+        timeout: 5000
+      });
+    } else {
+      document.getElementById('location').textContent = "Geolocation not supported.";
+    }
   </script>
 </body>
 </html>
