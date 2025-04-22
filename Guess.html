@@ -79,11 +79,6 @@
 
     window.onload = loadAll; // Load weapons when the page opens
 
-    if (localStorage.getItem('test') !== true) {
-        document.querySelectorAll('.show-if-test').forEach(btn => {
-          btn.style.display = 'none';
-        });
-    }
     </script>
 <body>
 <h1>Guess</h1>
@@ -111,5 +106,13 @@
     <button class="show-if-test" onclick="window.location.href='Retry.html'">Guess Wrong</button>
     <button class="show-if-test" onclick="window.location.href='Win.html'">Guess Correct</button>
 </div>
+<script>
+    //set visiblity of buttons
+    if (localStorage.getItem('test') !== true) {
+        document.querySelectorAll('.show-if-test').forEach(btn => {
+          btn.style.display = 'none';
+        });
+    }
+</script>
 </body>
 </html>
