@@ -27,13 +27,13 @@
 <script>
     function loadLocation() {
         let locationElement = document.getElementById('location');
-        if (locationElement == null)
+        if (localStorage.getItem('location') == null)
         {
             locationElement.innerHTML = "You are not currently at a crime scene.";
         }
         else
         {
-             locationElement.innerHTML = "You current location is: " + localStorage.getItem('location');
+             locationElement.innerHTML = "Your current location is: " + localStorage.getItem('location');
         }
     }
 
