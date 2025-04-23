@@ -16,6 +16,7 @@
 
         //set the crime scene
         function setScene(scene) {
+            coordsDiv.textContent = scene;
             if(localStorage.getItem('location') != scene) {
                 localStorage.setItem('location', scene);
                 alert('scene is ' + scene);
@@ -178,7 +179,6 @@
                 }
                 else { //crime scene
                     inScene=true
-                    coordsDiv.textContent = gameLoc.scene; // show on screen
                     setScene(gameLoc.scene);
                 }
             }
@@ -220,7 +220,7 @@
     }
 
     // set visibility of buttons
-    let isTest = (localStorage.getItem('test') == 'true');
+    let isTest = (localStorage.getItem('test') === 'true');
     let inLocation = (localStorage.getItem('location') != null);
     document.querySelectorAll('.in-location').forEach(btn => {
           if(inLocation || isTest)

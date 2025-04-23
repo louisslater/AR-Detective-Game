@@ -89,7 +89,7 @@
 
             alert(localStorage.getItem('correctSuspect') + " " + localStorage.getItem('correctWeapon') + " " + localStorage.getItem('correctLocation'));
 
-            localStorage.setItem('test', (mode=='test'))
+            localStorage.setItem('test', mode == 'test' ? 'true' : 'false');
 
             window.location.href = 'ARMap.html'; // Navigate to inventory page
         }
@@ -107,7 +107,7 @@
     <h2>How to Play</h2>
     <ul>
         <li>Choose a location to start the game: garden, park, or test mode.</li>
-        <li>Explore the AR environment to find weapons and investigate scenes.</li>
+        <li>Explore the AR environment to find weapons and use the map to investigate scenes.</li>
         <li>Collect clues and deduce the correct suspect, weapon, and location.</li>
         <li>You win by correctly identifying all three!</li>
     </ul>
