@@ -27,7 +27,14 @@
 <script>
     function loadLocation() {
         let location = document.getElementById('location');
-        location.innerHTML = "You current location is: " + localStorage.getItem('location');
+        if (location == null)
+        {
+            location.innerHTML = "You are not currently at a crime scene.";
+        }
+        else
+        {
+             location.innerHTML = "You current location is: " + localStorage.getItem('location');
+        }
     }
 
     function loadWeapons() {
