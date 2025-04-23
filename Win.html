@@ -55,14 +55,14 @@
     const weapon = localStorage.getItem('correctWeapon');
     const crimeLocation = localStorage.getItem('correctLocation');
 
-    document.getElementById('winText').innerText = `You win! You guessed ${suspect} at ${crimeLocation} with a ${weapon}.`;
+    document.getElementById('winText').innerText = `You win! You guessed ${suspect} at the ${crimeLocation} with a ${weapon}.`;
 
     document.getElementById('suspectImg').src = `assets/images/${suspect}.png`;
     document.getElementById('weaponImg').src = `assets/images/${weapon}.png`;
 
     document.getElementById('suspectName').innerText = suspect;
     document.getElementById('weaponName').innerText = weapon;
-    document.getElementById('locationName').innerText = `Location: ${crimeLocation}`;
+    document.getElementById('locationName').innerText = `at the ${crimeLocation}`;
 </script>
 </body>
 </html>
