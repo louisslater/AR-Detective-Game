@@ -101,5 +101,26 @@
 <button onclick="initGame('garden')">Start (garden)</button>
 <button onclick="initGame('park')">Start (park)</button>
 <button onclick="initGame('test')">Start (test)</button>
+<button onclick="showInstructions()">Instructions</button>
+
+<div id="instructionsModal" style="display:none; position:fixed; top:50%; left:50%; transform:translate(-50%, -50%); background:#333; padding:30px; border-radius:10px; box-shadow:0 0 20px #000; z-index:1000; max-width:80%; color:white;">
+    <h2>How to Play</h2>
+    <ul>
+        <li>Choose a location to start the game: garden, park, or test mode.</li>
+        <li>Explore the AR environment to find weapons and investigate scenes.</li>
+        <li>Collect clues and deduce the correct suspect, weapon, and location.</li>
+        <li>You win by correctly identifying all three!</li>
+    </ul>
+    <button onclick="closeInstructions()" style="margin-top:20px;">Close</button>
+</div>
+<script>
+    function showInstructions() {
+        document.getElementById('instructionsModal').style.display = 'block';
+    }
+
+    function closeInstructions() {
+        document.getElementById('instructionsModal').style.display = 'none';
+    }
+</script>
 </body>
 </html>
