@@ -2,12 +2,21 @@ html, body {
     height: 100%;
     margin: 0;
     padding: 0;
-    background-image: url('assets/images/main_menu.png'); /* Background image */
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center;
     font-family: sans-serif;
     color: white;
+}
+
+/* Background for index (main menu) */
+body#index {
+    background-image: url('assets/images/main_menu.png');
+}
+
+/* Background for all other pages */
+body:not(#index) {
+    background-image: url('assets/images/background.png');
 }
 
 h1 {
