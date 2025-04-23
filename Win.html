@@ -1,12 +1,68 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <link rel="stylesheet" href="style.css">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Win</title>
+    <style>
+        .win-container {
+            text-align: center;
+            margin-top: 50px;
+        }
+
+        .win-images {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            margin-top: 20px;
+        }
+
+        .win-images img {
+            width: 150px;
+            height: auto;
+            border-radius: 10px;
+            box-shadow: 0 0 10px #000;
+        }
+
+        .win-images .caption {
+            text-align: center;
+            margin-top: 8px;
+            font-size: 1.2em;
+        }
+    </style>
 </head>
 <body>
 <h1>Win</h1>
-<button onclick="window.location.href='Index.html'">Main Menu</button>
+<div class="win-container">
+    <p id="winText" style="font-size: 1.4em; text-shadow: 1px 1px 3px #000;"></p>
+    <div class="win-images">
+        <div>
+            <img id="suspectImg" src="" alt="Suspect">
+            <div class="caption" id="suspectName"></div>
+        </div>
+        <div>
+            <img id="weaponImg" src="" alt="Weapon">
+            <div class="caption" id="weaponName"></div>
+        </div>
+    </div>
+    <p id="locationName" style="margin-top: 20px; font-size: 1.3em;"></p>
+    <button onclick="window.location.href='Index.html'">Main Menu</button>
+</div>
+
+<script>
+    const suspect = localStorage.getItem('correctSuspect');
+    const weapon = localStorage.getItem('correctWeapon');
+    const location = localStorage.getItem('correctLocation');
+
+    document.getElementById('winText').innerText = `You win! You guessed ${suspect} at ${location} with a ${weapon}.`;
+
+    document.getElementById('suspectImg').src = `assets/images/${suspect}.png`;
+    document.getElementById('weaponImg').src = `assets/images/${weapon}.png`;
+
+    document.getElementById('suspectName').innerText = suspect;
+    document.getElementById('weaponName').innerText = weapon;
+    document.getElementById('locationName').innerText = `Location: ${location}`;
+</script>
 </body>
 </html>
