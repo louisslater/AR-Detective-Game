@@ -89,7 +89,7 @@
 
             alert(localStorage.getItem('correctSuspect') + " " + localStorage.getItem('correctWeapon') + " " + localStorage.getItem('correctLocation'));
 
-            localStorage.setItem('test', (mode=='test'))
+            localStorage.setItem('test', mode == 'test' ? 'true' : 'false');
 
             window.location.href = 'ARMap.html'; // Navigate to inventory page
         }
