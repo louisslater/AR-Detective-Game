@@ -63,11 +63,12 @@
 <p style="text-align: center; font-size: 1.2em; margin-top: -20px; text-shadow: 1px 1px 3px #000;">
     Welcome Detective!, choose a location to start the game in.
 </p>
-<button onclick="initGame('garden')">Start (garden)</button>
-<button onclick="initGame('park')">Start (park)</button>
-<button onclick="initGame('test')">Start (test)</button>
-<button onclick="showInstructions()">Instructions</button>
-
+<div class="button-container">
+    <button onclick="initGame('garden')">Start (garden)</button>
+    <button onclick="initGame('park')">Start (park)</button>
+    <button onclick="initGame('test')">Start (test)</button>
+    <button onclick="showInstructions()">Instructions</button>
+</div>
 <div id="instructionsModal" style="display:none; position:fixed; top:50%; left:50%; transform:translate(-50%, -50%); background:#333; padding:30px; border-radius:10px; box-shadow:0 0 20px #000; z-index:1000; max-width:80%; color:white;">
     <h2>How to Play</h2>
     <ul>
