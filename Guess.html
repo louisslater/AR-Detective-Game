@@ -27,7 +27,7 @@
 <script>
     function loadLocation() {
         let locationElement = document.getElementById('location');
-        if (localStorage.getItem('location') == null)
+        if (localStorage.getItem('location') === "null")
         {
             locationElement.innerHTML = "You are not currently at a crime scene.";
         }
