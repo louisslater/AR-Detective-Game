@@ -39,7 +39,17 @@
             localStorage.setItem('correctWeapon', allWeapons[Math.floor(Math.random() * 3)]);
             localStorage.setItem('correctLocation', allLocations[Math.floor(Math.random() * 3)]);
 
-
+            if(mode=='farnsfield') {
+                localStorage.setItem('gameLocations', JSON.stringify(
+                [
+                    { lat: 53.101607, long: -1.027429, radius: 3, weaponId: 'weapon1', color: 'red', weapon: 'knife'},
+                    { lat: 53.101589, long: -1.027255, radius: 3, weaponId: 'weapon2', color: 'orange', weapon: 'pistol'},
+                    { lat: 53.101556, long: -1.027082, radius: 3, weaponId: 'weapon3', color: 'yellow', weapon: 'candlestick'},
+                    { lat: 53.101521, long: -1.027404, radius: 3, color: 'green', scene: 'church'},
+                    { lat: 53.101494, long: -1.027054, radius: 3, color: 'blue', scene: 'car park'},
+                    { lat: 53.101509, long: -1.027177, radius: 3, color: 'purple', scene: 'supermarket'}
+                ]));
+            }
 
             if(mode=='garden') {
                 localStorage.setItem('gameLocations', JSON.stringify(
@@ -82,6 +92,7 @@
 <div class="button-container">
     <button onclick="initGame('garden')">Start (garden)</button>
     <button onclick="initGame('park')">Start (park)</button>
+    <button onclick="initGame('farnsfield')">Start (farnsfield)</button>
     <button onclick="initGame('test')">Start (test)</button>
     <button onclick="showInstructions()">Instructions</button>
 </div>
