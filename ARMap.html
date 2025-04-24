@@ -89,11 +89,13 @@
 
 <div id="buttons">
     <button onclick="window.location.href='Inventory.html'">Inventory</button>
-    <button class="show-if-test" onclick="window.location.href='Weapon.html'">Weapon</button>
     <button class="in-location" onclick="window.location.href='Guess.html'">Guess</button>
     <button class="show-if-test" onclick="setScene('church')">Set Scene Church</button>
     <button class="show-if-test" onclick="setScene('car park')">Set Scene Car Park</button>
     <button class="show-if-test" onclick="setScene('supermarket')">Set Scene Supermarket</button>
+    <button class="show-if-test" onclick="addItemAndNavigate('knife')">Add Knife</button>
+    <button class="show-if-test" onclick="addItemAndNavigate('pistol')">Add Pistol</button>
+    <button class="show-if-test" onclick="addItemAndNavigate('candlestick')">Add Candlestick</button>
 <!--    <button onclick="addWeaponAndNavigate()">Add Weapon GPS</button>-->
 </div>
 
@@ -238,6 +240,13 @@
               btn.style.display = 'none';
     });
 
+    function addItemAndNavigate(weapon) {
+        let weapons = JSON.parse(localStorage.getItem('weapons')) || []; // Get existing weapons or start a new list
+        if(!weapons.includes(weapon)) {
+            weapons.push(weapon); // Add a new item
+            localStorage.setItem('weapons', JSON.stringify(weapons)); // Save updated list
+            alert("added " + weapon + " to inventory");
+    };
 
 </script>
 </body>
