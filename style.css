@@ -48,13 +48,8 @@ h2 {
 button {
     display: inline-block;
     margin: 5px;
-<<<<<<< HEAD
     padding: 9px 15px;
     font-size: 0.9em;
-=======
-    padding: 10px 20px;
-    font-size: 1.2em;
->>>>>>> origin/main
     background: linear-gradient(135deg, #4b6cb7, #182848);
     border: none;
     border-radius: 5px;
