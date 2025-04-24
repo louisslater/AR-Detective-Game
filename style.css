@@ -96,7 +96,7 @@ button:hover {
     margin-bottom: 25px;
     font-size: 1.3em;
     display: flex;
-    align-items: center;
+    align-items: right;
     gap: 15px;
 }
 
