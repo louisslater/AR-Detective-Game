@@ -13,16 +13,16 @@
         <mxCell id="cc2T8idXbxZ61XJE0j38-4" value="ARMap.html&lt;div&gt;-html structure&lt;/div&gt;&lt;div&gt;-links to JS/CSS&lt;/div&gt;" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
           <mxGeometry x="200" y="340" width="120" height="60" as="geometry" />
         </mxCell>
-        <mxCell id="cc2T8idXbxZ61XJE0j38-5" value="Javascript code" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
-          <mxGeometry x="200" y="440" width="120" height="60" as="geometry" />
+        <mxCell id="cc2T8idXbxZ61XJE0j38-5" value="Javascript code&lt;div&gt;-initializes map&lt;/div&gt;&lt;div&gt;-handles geolocation&lt;/div&gt;&lt;div&gt;-manages AR elements&lt;/div&gt;" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="200" y="430" width="120" height="80" as="geometry" />
         </mxCell>
-        <mxCell id="cc2T8idXbxZ61XJE0j38-6" value="Leaflet.js" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+        <mxCell id="cc2T8idXbxZ61XJE0j38-6" value="Leaflet.js&lt;div&gt;-displays interactive map&lt;/div&gt;&lt;div&gt;-handles map events&lt;/div&gt;" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
           <mxGeometry x="200" y="540" width="120" height="60" as="geometry" />
         </mxCell>
-        <mxCell id="cc2T8idXbxZ61XJE0j38-7" value="Geolocation API" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+        <mxCell id="cc2T8idXbxZ61XJE0j38-7" value="Geolocation API&lt;div&gt;-retrieves user&#39;s current location&lt;/div&gt;" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
           <mxGeometry x="200" y="640" width="120" height="60" as="geometry" />
         </mxCell>
-        <mxCell id="cc2T8idXbxZ61XJE0j38-8" value="AR.js library" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+        <mxCell id="cc2T8idXbxZ61XJE0j38-8" value="AR.js library&lt;div&gt;-renders AR content&lt;/div&gt;&lt;div&gt;-Handles marker detection&lt;/div&gt;" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
           <mxGeometry x="200" y="740" width="120" height="60" as="geometry" />
         </mxCell>
         <mxCell id="cc2T8idXbxZ61XJE0j38-9" value="" style="endArrow=classic;html=1;rounded=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;exitX=0.5;exitY=1;exitDx=0;exitDy=0;" edge="1" parent="1" source="cc2T8idXbxZ61XJE0j38-1" target="cc2T8idXbxZ61XJE0j38-3">
