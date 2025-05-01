@@ -19,6 +19,15 @@
             <mxPoint x="479.99999999999994" y="330" as="targetPoint" />
           </mxGeometry>
         </mxCell>
+        <mxCell id="Pbngu6moprH94buiZck2-5" value="&lt;font size=&quot;1&quot;&gt;Inventory&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="305" y="305" width="50" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="Pbngu6moprH94buiZck2-6" value="&lt;font size=&quot;1&quot;&gt;Guess&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="364" y="305" width="41" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="Pbngu6moprH94buiZck2-7" value="&lt;font style=&quot;font-size: 8px;&quot;&gt;Crime scene&lt;/font&gt;" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="360" y="275" width="60" height="30" as="geometry" />
+        </mxCell>
       </root>
     </mxGraphModel>
   </diagram>
